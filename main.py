@@ -193,14 +193,21 @@ def convert_units(value, from_unit, to_unit, conversion_type):
         }
     }
     
-    if conversion_type == 'temperature':
+      if conversion_type == 'temperature':
         if from_unit == to_unit:
             return value
-        if conversions[conversion_type][from_unit][0] == to_unit:
-            return conversions[conversion_type][from_unit][1](value)
-        else:
-            intermediate = conversions[conversion_type][from_unit][1](value)
-            return convert_units(intermediate, conversions[conversion_type][from_unit][0], to_unit, conversion_type)
+        # Convert to Celsius first if needed
+        if from_unit == 'fahrenheit':
+            value = (value - 32) * 5/9  # Convert Fahrenheit to Celsius
+        elif from_unit == 'kelvin':
+            value = value - 273.15  # Convert Kelvin to Celsius
+        # Now convert from Celsius to the target unit
+        if to_unit == 'celsius':
+            return value
+        elif to_unit == 'fahrenheit':
+            return (value * 9/5) + 32  # Convert Celsius to Fahrenheit
+        elif to_unit == 'kelvin':
+            return value + 273.15  # Convert Celsius to Kelvin
     else:
         return value * conversions[conversion_type][from_unit] / conversions[conversion_type][to_unit]
 
