@@ -12,7 +12,6 @@ background_color = "#FFFFFF"  # White
 text_color = "#000000"  # Black
 card_color = "#F5F5F5"  # Light Gray
 
-# Custom CSS
 custom_css = f"""
     <style>
         :root {{
@@ -96,8 +95,43 @@ custom_css = f"""
             0% {{ opacity: 0; transform: translateY(-20px); }}
             100% {{ opacity: 1; transform: translateY(0); }}
         }}
+
+        /* Override the default blue color in select boxes */
+        .stSelectbox > div > div > select {{
+            background-color: var(--card-color) !important;
+            color: var(--text-color) !important;
+            border: 1px solid var(--primary-color) !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+        }}
+        .stSelectbox > div > div > select:hover,
+        .stSelectbox > div > div > select:focus {{
+            border-color: var(--primary-color) !important;
+            box-shadow: 0 0 5px rgba(108, 99, 255, 0.5) !important;
+        }}
+        .stSelectbox > div > div > select > option {{
+            background-color: var(--card-color) !important;
+            color: var(--text-color) !important;
+        }}
+        .stSelectbox > div > div > select:focus {{
+            outline: none !important;
+        }}
+        .main-heading-box {{
+            background: linear-gradient(135deg,rgb(105, 33, 105),rgb(149, 171, 189)); /* Light Gradient */
+            color: white; /* Dark Text */
+            padding: 20px;
+            text-align: center;
+            border-radius: 12px;
+            font-size: 32px;
+            font-weight: bold;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }}
     </style>
-    """
+"""
 
 # Unit conversion functions
 def convert_units(value, from_unit, to_unit, conversion_type):
@@ -244,8 +278,8 @@ def main():
     with st.sidebar:
         st.markdown("""
         <div style="text-align:center;">
-            <h1 style='color:orange;'>🌐 Ultimate Converter Pro</h1>
-            <p style="color:teal;">Your All-in-One Conversion Solution 🔄</p>
+            <h1 style='color:orange;font-size:24px'>🌐 Ultimate Converter Pro</h1>
+            <p style="color:teal;font-size:18px;">Your All-in-One Conversion Solution 🔄</p>
         </div>
         """, unsafe_allow_html=True)
         
@@ -260,7 +294,10 @@ def main():
         
         # Conversion type selection
         conversion_type = st.radio("Choose Conversion Type", ["📏 Unit Converter", "💱 Currency Converter"])
+        
     
+    with st.container():
+     st.markdown('<div class="main-heading-box">✨ Multi-Converter Pro in python 🚀 <br> <p style="color:white;font-size:20px;">Your all in one conversion ..</p></div>', unsafe_allow_html=True)
     # Main content
     if conversion_type == "📏 Unit Converter":
         st.markdown("""
@@ -442,7 +479,7 @@ def main():
     # Footer
     st.markdown("""
     <div class="footer">
-        Made with ❤️ by Conversion Master Pro |
+        Made with ❤️ by Aamna Ashraf Rajput |
         ℹ️ Certified Accurate Conversions 
     </div>
     """, unsafe_allow_html=True)
